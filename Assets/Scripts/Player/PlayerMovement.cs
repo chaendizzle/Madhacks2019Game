@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D[] results = new RaycastHit2D[3];
         // raycast for a collision down
         Physics2D.Raycast((Vector2)transform.position + pos, Vector2.down, new ContactFilter2D(), results,
-            vCollider.bounds.extents.y - vCollider.offset.y + 0.1f);
+            vCollider.bounds.extents.y + vCollider.offset.y + 0.1f);
         // make sure raycast hit isn't only player
         foreach (RaycastHit2D result in results)
         {
