@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         camera.yMax -= borderY;
         float posX = Mathf.Clamp(transform.position.x, camera.xMin, camera.xMax);
         float posY = Mathf.Clamp(transform.position.y, camera.yMin, camera.yMax);
-        transform.position = new Vector3(posX, posY, transform.position.z);
+        //transform.position = new Vector3(posX, posY, transform.position.z);
     }
 
     protected virtual bool Jumpable()
