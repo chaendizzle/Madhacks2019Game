@@ -36,6 +36,14 @@ public class PlayerMovement : MonoBehaviour
         body.drag = 0f;
         sr.flipX = false;
         bool grounded = Grounded();
+        if (grounded)
+        {
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+        }
+        else
+        {
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
+        }
 
         int hDirection = 0;
         if (Input.GetKey("left") && Movable())
@@ -46,7 +54,26 @@ public class PlayerMovement : MonoBehaviour
         {
             hDirection++;
         }
-        body.velocity = new Vector2(hDirection * horizontalSpeed, body.velocity.y);
+        if (hDirection < 0)
+        {
+            body.velocity = new Vector2(-horizontalSpeed + GetCameraSpeed() * 0.6f, body.velocity.y);
+        }
+        else if (hDirection > 0)
+        {
+            body.velocity = new Vector2(horizontalSpeed + GetCameraSpeed() * 0.6f, body.velocity.y);
+        }
+        else
+        {
+            if (grounded)
+            {
+                body.velocity = new Vector2(0, body.velocity.y);
+            }
+            else
+            {
+                body.velocity = new Vector2(GetCameraSpeed() * 0.6f, body.velocity.y);
+            }
+        }
+        
 
         if (Input.GetKeyDown("up") && Jumpable())
         {
@@ -71,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         camera.yMax -= borderY;
         float posX = Mathf.Clamp(transform.position.x, camera.xMin, camera.xMax);
         float posY = Mathf.Clamp(transform.position.y, camera.yMin, camera.yMax);
-        //transform.position = new Vector3(posX, posY, transform.position.z);
+        // transform.position = new Vector3(posX, posY, transform.position.z);
     }
 
     protected virtual bool Jumpable()
@@ -112,4 +139,8 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
+    private float GetCameraSpeed()
+    {
+        return Camera.main.gameObject.GetComponent<CameraMovement>().speed.x;
+    }
 }
