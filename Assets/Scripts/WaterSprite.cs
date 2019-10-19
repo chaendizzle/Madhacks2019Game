@@ -22,6 +22,6 @@ public class WaterSprite : MonoBehaviour
         Rect camera = CameraMovement.CameraRect();
         float yPos = (y + camera.yMin) * 0.5f;
         transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
-        transform.localScale = new Vector3(transform.localScale.x, camera.yMin - y, transform.localScale.z);
+        transform.localScale = new Vector3(transform.localScale.x, camera.yMin - y - 1f, transform.localScale.z);
     }
 }
