@@ -16,6 +16,10 @@ public class PlayerMovement : MonoBehaviour
 
  	[HideInInspector] public int facingX = -1;
 
+    // border that the player must stay within the camera
+    public float borderX = 1f;
+    public float borderY = 1f;
+
     protected virtual void Start()
     {
         gravity = 0.9f;
@@ -33,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
         sr.flipX = false;
         bool grounded = Grounded();
 
-        // can't move if transition exists
         int hDirection = 0;
         if (Input.GetKey("left") && Movable())
         {
@@ -59,6 +62,16 @@ public class PlayerMovement : MonoBehaviour
         }
         //animator.SetFloat("VelocityY", Mathf.Sign(body.velocity.y));
         //animator.SetBool("Grounded", grounded);
+
+        // clamp to camera rect
+        Rect camera = CameraMovement.CameraRect();
+        camera.xMin += borderX;
+        camera.xMax -= borderX;
+        camera.yMin += borderY;
+        camera.yMax -= borderY;
+        float posX = Mathf.Clamp(transform.position.x, camera.xMin, camera.xMax);
+        float posY = Mathf.Clamp(transform.position.y, camera.yMin, camera.yMax);
+        transform.position = new Vector3(posX, posY, transform.position.z);
     }
 
     protected virtual bool Jumpable()
