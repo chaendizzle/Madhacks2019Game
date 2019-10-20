@@ -108,7 +108,6 @@ public class Director : MonoBehaviour
 
     RenderedPlatform GenerateVariableHightPlatform(Rect cameraRect)
     {
-        RenderedPlatform previous = platforms[platforms.Count - 1];
 
         //determine width of platform from platform budget
         GameObject prefab = floatingPlatforms[(int)Mathf.Floor(Random.Range(0, floatingPlatforms.Count - 1))];
@@ -125,13 +124,21 @@ public class Director : MonoBehaviour
             + jumpVelocity * xVelocity) / gravity;
         float xOffset = Random.Range(MIN_SPACING, xOffsetBound);
 
-        return RenderedPlatform.FromUpperLeft(prefab, 
-            new Vector3(previous.upperRight.x + xOffset, previous.upperRight.y + yOffset, 0));
+        if (platforms.Count > 0)
+        {
+            RenderedPlatform previous = platforms[platforms.Count - 1];
+            return RenderedPlatform.FromUpperLeft(prefab,
+                new Vector3(previous.upperRight.x + xOffset, previous.upperRight.y + yOffset, 0));
+        }
+        else
+        {
+            return RenderedPlatform.FromUpperLeft(prefab,
+                new Vector3(cameraRect.center.x + xOffset, cameraRect.center.y + yOffset, 0));
+        }
     }
 
     RenderedPlatform GenerateStaticHeightPlatform(Rect cameraRect)
     {
-        RenderedPlatform previous = platforms[platforms.Count - 1];
 
         //determine width of platform from platform budget
         GameObject prefab = groundedPlatforms[(int)Mathf.Floor(Random.Range(0, groundedPlatforms.Count - 1))];
@@ -140,7 +147,15 @@ public class Director : MonoBehaviour
         float xOffsetBound = 2 * jumpVelocity * xVelocity / gravity;
         float xOffset = Random.Range(MIN_SPACING, xOffsetBound);
 
-        return new RenderedPlatform(prefab, new Vector3(previous.upperRight.x + xOffset, waterHeight));
+        if (platforms.Count > 0)
+        {
+            RenderedPlatform previous = platforms[platforms.Count - 1];
+            return new RenderedPlatform(prefab, new Vector3(previous.upperRight.x + xOffset, waterHeight));
+        }
+        else
+        {
+            return new RenderedPlatform(prefab, new Vector3(cameraRect.center.x + xOffset, waterHeight));
+        }
     }
 
     // Update is called once per frame
@@ -167,6 +182,13 @@ public class Director : MonoBehaviour
         //discard old platforms
         for (int i = 0; i < platforms.Count; i++)
         {
+            if (platforms[i].obj == null)
+            {
+                platforms.RemoveAt(i);
+                i--;
+                continue;
+            }
+
             if (platforms[i].obj.transform.position.x + (platforms[i].width / 2) < cameraView.xMin)
             {
                 Destroy(platforms[i].obj);
