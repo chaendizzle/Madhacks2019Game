@@ -15,6 +15,15 @@ public class ScoreBar : MonoBehaviour
     private Sprite eventSprite;
 
     private static ScoreBar instance;
+    
+    [System.Serializable]
+    public enum  State
+    {
+        FILLING,
+        SICKO_MODE
+    }
+
+    public State currentState;
     public static ScoreBar GetInstance()
     {
         return instance;
@@ -38,16 +47,24 @@ public class ScoreBar : MonoBehaviour
     {
         //TODO: only update if player is alive
         ppm += Time.deltaTime;
-        
-        if (ppm > eventPeriod)
+
+        if (ppm > eventPeriod && currentState == State.FILLING)
         {
-            SickoMode();
+            currentState = State.SICKO_MODE;
             eventSprite = ClimateEvents.GetInstance().StartClimateEvent();
+        }
+        
+        if (currentState == State.SICKO_MODE)
+        {
+            ppm = eventPeriod;
+            SickoMode();
             warningImages.SetActive(true);
         }
 
         healthBar.UpdateBar(ppm, eventPeriod);
     }
+
+
     private enum SickoState
     {
         BLACK,
@@ -80,6 +97,7 @@ public class ScoreBar : MonoBehaviour
     {
         backgroundImage.GetComponent<Image>().color = Color.black;
         sickoState = SickoState.BLACK;
+        currentState = State.FILLING;
         warningImages.SetActive(false);
         ppm = 0; 
     }
