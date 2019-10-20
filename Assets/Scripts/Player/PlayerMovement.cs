@@ -6,6 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
     public float horizontalSpeed;
     public float jumpSpeed;
+    private readonly float MAXFALLSPEED = -10;
+    private bool squat;
+    private readonly int SQUATLENGTH = 3;
+    private int squatCount;
     private float gravity;
     private Sprite[] gasSprites;
 
@@ -22,12 +26,14 @@ public class PlayerMovement : MonoBehaviour
 
     protected virtual void Start()
     {
-        gravity = 0.9f;
+        gravity = 3.6f;
         sr = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         vCollider = GetComponent<CapsuleCollider2D>();
         sr.flipX = false;
+        squatCount = 0;
+        squat = false;
     }
 
     // Update is called once per frame
@@ -36,6 +42,11 @@ public class PlayerMovement : MonoBehaviour
         body.gravityScale = gravity;
         body.drag = 0f;
         bool grounded = Grounded();
+
+        if (squat)
+        {
+            squatCount++;
+        }
 
         //Tests Grounded()
         //if (grounded)
@@ -74,9 +85,29 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown("up") && Jumpable())
         {
-            body.velocity = new Vector2(body.velocity.x, jumpSpeed);
             animator.SetTrigger("Jumpsquat");
+            if(!squat)
+                squat = true;
         }
+
+        if (squatCount == SQUATLENGTH)
+        {
+            squat = false;
+            squatCount = 0;
+
+            body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+
+            // Change jump height based on if key is held
+            //if (Input.GetKeyDown("up"))
+            //{
+            //    body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+            //}
+            //else
+            //{
+            //    body.velocity = new Vector2(body.velocity.x, (int) 0.5 * jumpSpeed);
+            //}
+        }
+
 
         // animate with blend tree
         //animator.SetFloat("VelocityX", hDirection);
@@ -95,6 +126,11 @@ public class PlayerMovement : MonoBehaviour
         else if (hDirection < 0)
         {
             sr.flipX = true;
+        }
+
+        if (body.velocity.y < MAXFALLSPEED)
+        {
+            body.velocity = new Vector2(body.velocity.x, MAXFALLSPEED);
         }
 
         // Set all animation indicators

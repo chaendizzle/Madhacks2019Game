@@ -120,8 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalSpeed: 3
-  jumpSpeed: 7
+  jumpSpeed: 14
   facingX: -1
+  borderX: 1
+  borderY: 1
 --- !u!95 &95918661667748618
 Animator:
   serializedVersion: 3
