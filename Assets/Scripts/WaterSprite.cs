@@ -9,7 +9,7 @@ public class WaterSprite : MonoBehaviour
     {
         transform.position = new Vector3(0, 0, transform.position.z);
         transform.localScale = CameraMovement.CameraRect().size * 1f;
-        SetHeight(-4.5f);
+        SetHeight(-3.9f);
     }
 
     // Update is called once per frame

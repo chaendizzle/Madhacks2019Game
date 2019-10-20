@@ -230,6 +230,11 @@ PrefabInstance:
       propertyPath: VelocityModule.x.maxCurve.m_Curve.Array.data[4].time
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 198544484234805276, guid: 59a730ae53fff15409089d35511eeab5,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59a730ae53fff15409089d35511eeab5, type: 3}
 --- !u!1001 &120202006
@@ -318,6 +323,75 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 6e9257341b20b384ebd8a45d2991e818, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81445e500edb86842abbd3e0619e0ae2, type: 3}
+--- !u!1001 &153092191
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7726602405815790994, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_Name
+      value: ClimateEvents
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.5766764
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.38075238
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.2132697
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726602405815791020, guid: 050241f8831e6784b8e34bc23c8a6bb2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 050241f8831e6784b8e34bc23c8a6bb2, type: 3}
 --- !u!1001 &356965603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -859,6 +933,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 663274119}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &696953369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1029095630147704, guid: 59a730ae53fff15409089d35511eeab5,
+    type: 3}
+  m_PrefabInstance: {fileID: 65786447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &696953373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696953369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f64ca7198c2f1f4ebfbdd059a14aff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &878070237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -928,56 +1020,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2b38245842151b4aa2dc666f66381e6, type: 3}
---- !u!1 &1248384543
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1248384545}
-  - component: {fileID: 1248384544}
-  m_Layer: 0
-  m_Name: ClimateEvents
-  m_TagString: ClimateEventsHandler
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1248384544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248384543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9d4a2aedbbd61740a8e7f4718ede9c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shatterPlatforms: 0
-  darkenScreen: 0
-  wind: 0
-  clouds: 0
-  waterLevel: 0
-  shrinkingPlatforms: 0
-  events: []
---- !u!4 &1248384545
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248384543}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5766764, y: -0.38075238, z: -7.2132697}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1266245307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1431,6 +1473,11 @@ PrefabInstance:
     - target: {fileID: 9027215192327137282, guid: a0977c7ddf2068640b1bfbfe90d0b1c8,
         type: 3}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027215192327137281, guid: a0977c7ddf2068640b1bfbfe90d0b1c8,
+        type: 3}
+      propertyPath: alpha
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

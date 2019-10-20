@@ -55,6 +55,7 @@ public class ClimateEvents : MonoBehaviour
         SetClimateEvent(name);
         yield return new WaitForSeconds(time);
         SetClimateEvent("None");
+        ScoreBar.GetInstance().Reset();
         current = null;
     }
 

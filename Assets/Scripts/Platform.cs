@@ -13,19 +13,28 @@ public class Platform : MonoBehaviour
         // scale PlatformBottom downwards
         Rect rect = CameraMovement.CameraRect();
         Transform bot = transform.Find("PlatformBottom");
-        if (bot == null)
+        if (bot != null)
         {
-            return;
+            bottom = bot.gameObject;
+            bottom.transform.position = new Vector3(bottom.transform.position.x,
+                (rect.yMin + transform.position.y) * 0.5f,
+                bottom.transform.position.z);
+            SpriteRenderer sr = bottom.GetComponent<SpriteRenderer>();
+            float spriteScale = transform.localScale.y * sr.sprite.rect.height / sr.sprite.pixelsPerUnit;
+            bottom.transform.localScale = new Vector3(bottom.transform.localScale.x,
+                Mathf.Abs(rect.yMin - transform.position.y) / spriteScale,
+                bottom.transform.localScale.z);
         }
-        bottom = bot.gameObject;
-        bottom.transform.position = new Vector3(bottom.transform.position.x,
-            (rect.yMin + transform.position.y) * 0.5f,
-            bottom.transform.position.z);
-        SpriteRenderer sr = bottom.GetComponent<SpriteRenderer>();
-        float spriteScale = transform.localScale.y * sr.sprite.rect.height / sr.sprite.pixelsPerUnit;
-        bottom.transform.localScale = new Vector3(bottom.transform.localScale.x,
-            Mathf.Abs(rect.yMin - transform.position.y) / spriteScale,
-            bottom.transform.localScale.z);
+
+        // handle climate events
+        if (ClimateEvents.GetInstance().shatterPlatforms)
+        {
+            gameObject.AddComponent<ShatterPlatform>();
+        }
+        if (ClimateEvents.GetInstance().shrinkingPlatforms)
+        {
+            gameObject.AddComponent<ShrinkPlatform>();
+        }
     }
     
     bool exploded = false;
