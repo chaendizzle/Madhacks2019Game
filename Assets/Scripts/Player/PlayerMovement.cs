@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         if (squat)
         {
             squatCount++;
+            //Debug.Log(squatCount);
         }
 
         //Tests Grounded()
@@ -89,11 +90,11 @@ public class PlayerMovement : MonoBehaviour
                 squat = true;
         }
 
+
         if (squatCount == SQUATLENGTH)
         {
             squat = false;
             squatCount = 0;
-
             body.velocity = new Vector2(body.velocity.x, jumpSpeed);
 
             // Change jump height based on if key is held
