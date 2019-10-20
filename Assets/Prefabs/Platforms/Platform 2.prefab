@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8790397881857671412}
   - component: {fileID: 8740813098337708771}
   - component: {fileID: 8740813098337708768}
+  - component: {fileID: 1948346219}
+  - component: {fileID: 1948346220}
   m_Layer: 0
   m_Name: Platform 2
   m_TagString: Untagged
@@ -27,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8740813098337708770}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.47, y: -4.46, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -136,8 +138,9 @@ PolygonCollider2D:
       - {x: -2.3497138, y: 0.29640293}
       - {x: -2.184441, y: 0.035439968}
       - {x: -1.9814005, y: -0.29028177}
-      - {x: 0.891922, y: -0.33648205}
-      - {x: 1.9291203, y: -0.3490014}
+      - {x: -1.3399658, y: -0.6629696}
+      - {x: 0.040895462, y: -0.7473221}
+      - {x: 1.2248225, y: -0.7598419}
       - {x: 2.36, y: -0.17999999}
       - {x: 2.3599997, y: 0.43326283}
 --- !u!114 &8740813098337708768
@@ -152,3 +155,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68792974f780fc743b857f28124ed406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1948346219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740813098337708770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af6dd9712bb07c43a7a851e83d317f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1948346220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8740813098337708770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75953d6b31f574644be1238b08e89b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowRuntimeFragmentation: 1
+  extraPoints: 5
+  subshatterSteps: 0
+  fragmentLayer: Default
+  sortingLayerName: Default
+  orderInLayer: 0
+  shatterType: 1
+  fragments: []
