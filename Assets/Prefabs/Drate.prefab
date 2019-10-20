@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 4796540665793124}
   - component: {fileID: 212900453216319898}
   - component: {fileID: 50921828897062288}
+  - component: {fileID: 6391024889880519330}
   - component: {fileID: 114004911605563562}
   - component: {fileID: 95918661667748618}
   - component: {fileID: 70086087502742108}
   - component: {fileID: 58057055832964410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Drate
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 29f9fecff0002994da61c363a0396a44, type: 3}
+  m_Sprite: {fileID: 5764630794459738774, guid: 47b2526c8bbbd624abca77603f026efa,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +100,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0.5
@@ -107,6 +109,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6391024889880519330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326411566667654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e6d3c1e9663e640b9f188b449f7d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  left: 0
+  right: 0
+  up: 0
 --- !u!114 &114004911605563562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d19e4ac6d8de1342b8ebdde26284c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 3
+  horizontalSpeed: 5
   jumpSpeed: 14
   facingX: -1
   borderX: 1
@@ -134,7 +151,7 @@ Animator:
   m_GameObject: {fileID: 1326411566667654}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6e9257341b20b384ebd8a45d2991e818, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

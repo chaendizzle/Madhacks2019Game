@@ -9,7 +9,7 @@ public class ShrinkPlatform : MonoBehaviour
     public float distance = 5f;
     public float shrinkTime = 1.8f;
 
-    public float shrinkMin = 0.5f;
+    public float shrinkMin = 0.85f;
 
     float initialScale = 1f;
     // Start is called before the first frame update

@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventPeriod: 30
+  score: 0
   currentState: 0
   blinkPeriod: 0.4
 --- !u!1 &3545814253194214413
@@ -365,7 +366,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 745163729104112190, guid: b888103c400c001468311af77bcc5cd3, type: 3}
+  m_Sprite: {fileID: 2942817609952979283, guid: b888103c400c001468311af77bcc5cd3,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

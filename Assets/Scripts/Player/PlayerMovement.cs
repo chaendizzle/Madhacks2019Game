@@ -23,14 +23,16 @@ public class PlayerMovement : MonoBehaviour
     // border that the player must stay within the camera
     public float borderX = 1f;
     public float borderY = 1f;
+    PlayerInput playerInput;
 
     protected virtual void Start()
     {
-        gravity = 3.6f;
+        gravity = 5.5f;
         sr = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         vCollider = GetComponent<CapsuleCollider2D>();
+        playerInput = GetComponent<PlayerInput>();
         sr.flipX = false;
         squatCount = 0;
         squat = false;
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update ()
     {
+        playerInput.UpdateInput();
         body.gravityScale = gravity;
         body.drag = 0f;
         bool grounded = Grounded();
@@ -59,22 +62,23 @@ public class PlayerMovement : MonoBehaviour
         //    sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
         //}
 
-        int hDirection = (Input.GetKey("left") && !Input.GetKey("right") && Movable()) ? -1 : 
-                            (!Input.GetKey("left") && Input.GetKey("right") && Movable()) ? 1 : 0;
+        int hDirection = (playerInput.xmovement < 0 && Movable()) ? -1 : 
+                            (playerInput.xmovement > 0 && Movable()) ? 1 : 0;
 
 
         float windSpeed = 0f;
         if (ClimateEvents.GetInstance().wind && !grounded)
         {
-            windSpeed = -2f;
+            windSpeed = -3f;
         }
+        Director.GetInstance().xVelocity = Mathf.Abs(horizontalSpeed) * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed;
         if (hDirection < 0)
         {
-            body.velocity = new Vector2(-horizontalSpeed + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
+            body.velocity = new Vector2(horizontalSpeed * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
         }
         else if (hDirection > 0)
         {
-            body.velocity = new Vector2(horizontalSpeed + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
+            body.velocity = new Vector2(horizontalSpeed * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
         }
         else
         {
@@ -88,11 +92,15 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown("up") && Jumpable())
+        if (playerInput.up && Jumpable())
         {
             animator.SetTrigger("Jumpsquat");
             if(!squat)
                 squat = true;
+        }
+        if (playerInput.up)
+        {
+            body.gravityScale = gravity * 0.5f;
         }
 
 
@@ -138,6 +146,12 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, MAXFALLSPEED);
         }
 
+
+        if (transform.position.x > CameraMovement.CameraRect().xMax)
+        {
+            transform.position = new Vector3(CameraMovement.CameraRect().xMax, transform.position.y, transform.position.z);
+        }
+
         // Set all animation indicators
         animator.SetFloat("VelocityX", body.velocity.x);
         animator.SetFloat("VelocityY", body.velocity.y);
@@ -168,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D[] results = new RaycastHit2D[3];
         // raycast for a collision down
         Physics2D.Raycast((Vector2)transform.position + pos, Vector2.down, new ContactFilter2D(), results,
-            vCollider.bounds.extents.y + vCollider.offset.y + 0.1f);
+            vCollider.bounds.extents.y + vCollider.offset.y + 0.3f);
         // make sure raycast hit isn't only player
         foreach (RaycastHit2D result in results)
         {

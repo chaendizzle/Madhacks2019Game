@@ -36,7 +36,7 @@ public class Platform : MonoBehaviour
         {
             gameObject.AddComponent<ShatterPlatform>();
         }
-        else
+        else if (!ClimateEvents.GetInstance().shatterSky)
         {
             ShatterPlatform shatform = gameObject.GetComponent<ShatterPlatform>();
             if (shatform != null && !shatform.shattering)

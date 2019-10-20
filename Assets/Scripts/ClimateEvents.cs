@@ -11,6 +11,8 @@ public class ClimateEvents : MonoBehaviour
     public bool clouds = false;
     public bool waterLevel = false;
     public bool shrinkingPlatforms = false;
+    public bool shatterSky = false;
+    public List<GameObject> shatters;
 
     [Serializable]
     public struct ClimateEvent
@@ -32,10 +34,37 @@ public class ClimateEvents : MonoBehaviour
         
     }
 
+    IEnumerator shatterSkyCoroutine;
     // Update is called once per frame
     void Update()
     {
-        
+        // if shattering the sky, periodically spawn shattering icebergs in the sky
+        if (shatterSky && shatterSkyCoroutine == null)
+        {
+            shatterSkyCoroutine = ShatterSky();
+            StartCoroutine(shatterSkyCoroutine);
+        }
+        if (!shatterSky && shatterSkyCoroutine != null)
+        {
+            StopCoroutine(shatterSkyCoroutine);
+            shatterSkyCoroutine = null;
+        }
+    }
+
+    IEnumerator ShatterSky()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        while (true)
+        {
+            Rect rect = CameraMovement.CameraRect();
+            float xPos = UnityEngine.Random.Range((rect.xMin + rect.xMax) * 0.5f, rect.xMax);
+            GameObject go = Instantiate(shatters[UnityEngine.Random.Range(0, shatters.Count)],
+                new Vector3(xPos, rect.yMax + 7f, transform.position.z), transform.rotation);
+            go.transform.eulerAngles = new Vector3(0f, 0f, 90f);
+            Vector3 pos = go.transform.position;
+            go.AddComponent<ShatterPlatform>();
+            yield return new WaitForSeconds(UnityEngine.Random.Range(1.4f, 2.2f));
+        }
     }
 
     public Sprite StartClimateEvent()
@@ -81,6 +110,7 @@ public class ClimateEvents : MonoBehaviour
         clouds = false;
         waterLevel = false;
         shrinkingPlatforms = false;
+        shatterSky = false;
         switch (name)
         {
             case "RisingSeaLevel":
@@ -103,6 +133,7 @@ public class ClimateEvents : MonoBehaviour
                 wind = true;
                 darkenScreen = true;
                 shatterPlatforms = true;
+                shatterSky = true;
                 break;
             default:
                 break;
