@@ -8,7 +8,7 @@ public class WaterSprite : MonoBehaviour
     void Start()
     {
         transform.position = new Vector3(0, 0, transform.position.z);
-        transform.localScale = CameraMovement.CameraRect().size * 1f;
+        transform.localScale = CameraMovement.CameraRect().size * 5f;
         SetHeight(-3.9f);
     }
 
@@ -22,7 +22,7 @@ public class WaterSprite : MonoBehaviour
         Rect camera = CameraMovement.CameraRect();
         float yPos = (y + camera.yMin) * 0.5f;
         transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
-        transform.localScale = new Vector3(transform.localScale.x, camera.yMin - y - 1f, transform.localScale.z);
+        transform.localScale = new Vector3(transform.localScale.x, Mathf.Abs(camera.yMin - y - 1f), transform.localScale.z);
         transform.Find("WaterBottom").transform.position = transform.position + Vector3.down * 0.75f;
     }
 }
