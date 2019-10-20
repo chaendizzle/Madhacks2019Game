@@ -17,6 +17,7 @@ TagManager:
   - Bullet
   - HealthBar
   - Fragment
+  - ClimateEventsHandler
   layers:
   - Default
   - TransparentFX
