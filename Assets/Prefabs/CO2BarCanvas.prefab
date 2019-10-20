@@ -234,7 +234,6 @@ GameObject:
   - component: {fileID: 3198093736774904028}
   - component: {fileID: 3198093736774904031}
   - component: {fileID: 3198093736774904030}
-  - component: {fileID: -9055900764232585517}
   m_Layer: 0
   m_Name: CO2BarCanvas
   m_TagString: Untagged
@@ -322,20 +321,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &-9055900764232585517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3198093736774904016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7bb67e9d02243498c7e5c21d0aed51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventPeriod: 30
-  blinkPeriod: 0.4
 --- !u!1 &3545814253194214413
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3942046740009387111}
+  - component: {fileID: 8135762112460276227}
   m_Layer: 0
   m_Name: CO2Bar
   m_TagString: Untagged
@@ -449,6 +435,21 @@ RectTransform:
   m_AnchoredPosition: {x: 10, y: -80}
   m_SizeDelta: {x: 100, y: 67.25}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &8135762112460276227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7074635276014592984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7bb67e9d02243498c7e5c21d0aed51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventPeriod: 30
+  currentState: 0
+  blinkPeriod: 0.4
 --- !u!1001 &3198093736952426516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -456,6 +457,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3942046740009387111}
     m_Modifications:
+    - target: {fileID: 109282, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 3}
+      propertyPath: m_Name
+      value: Simple Bar
+      objectReference: {fileID: 0}
     - target: {fileID: 22403254, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -539,10 +544,6 @@ PrefabInstance:
     - target: {fileID: 22403254, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 109282, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 3}
-      propertyPath: m_Name
-      value: Simple Bar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60da1df1f7edb3747bea8f735b2768d1, type: 3}
