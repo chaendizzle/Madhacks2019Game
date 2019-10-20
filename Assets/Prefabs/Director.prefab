@@ -56,4 +56,5 @@ MonoBehaviour:
   jumpVelocity: 14
   xVelocity: 5
   gravity: 35.316
-  bufferDistance: 1
+  xBufferDistance: 0
+  yBufferDistance: 1
