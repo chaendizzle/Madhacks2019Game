@@ -35,17 +35,14 @@ public class PlayerInput : MonoBehaviour
             xmovement = 1;
         }
         up = false;
-        if (Input.GetKeyDown("up"))
+        if (Input.GetKey("up"))
         {
             up = true;
         }
         // touch input for jump
         foreach (Touch t in Input.touches)
         {
-            if (t.phase == TouchPhase.Began)
-            {
-                up = true;
-            }
+            up = true;
         }
         if (Mathf.Abs(Input.acceleration.x) > 0.05f)
         {

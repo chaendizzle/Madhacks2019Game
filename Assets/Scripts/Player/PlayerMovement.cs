@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     protected virtual void Start()
     {
-        gravity = 3.6f;
+        gravity = 5.5f;
         sr = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -71,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         {
             windSpeed = -4f;
         }
+        Director.GetInstance().xVelocity = Mathf.Abs(horizontalSpeed) * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed;
         if (hDirection < 0)
         {
             body.velocity = new Vector2(horizontalSpeed * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
@@ -96,6 +97,10 @@ public class PlayerMovement : MonoBehaviour
             animator.SetTrigger("Jumpsquat");
             if(!squat)
                 squat = true;
+        }
+        if (playerInput.up)
+        {
+            body.gravityScale = gravity * 0.5f;
         }
 
 
@@ -139,6 +144,12 @@ public class PlayerMovement : MonoBehaviour
         if (body.velocity.y < MAXFALLSPEED)
         {
             body.velocity = new Vector2(body.velocity.x, MAXFALLSPEED);
+        }
+
+
+        if (transform.position.x > CameraMovement.CameraRect().xMax)
+        {
+            transform.position = new Vector3(CameraMovement.CameraRect().xMax, transform.position.y, transform.position.z);
         }
 
         // Set all animation indicators
