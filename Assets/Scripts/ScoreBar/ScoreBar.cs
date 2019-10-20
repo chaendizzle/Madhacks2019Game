@@ -8,11 +8,11 @@ public class ScoreBar : MonoBehaviour
     public float eventPeriod;
 
     private SimpleHealthBar healthBar;
-    private GameObject warningImages;
-    private GameObject backgroundImage; 
+    private GameObject backgroundImage;
+    private GameObject warningBar;
+    private GameObject eventImage;
 
     private float ppm = 0;
-    private Sprite eventSprite;
 
     private static ScoreBar instance;
     
@@ -31,15 +31,19 @@ public class ScoreBar : MonoBehaviour
 
     void Start()
     {
-        healthBar = transform.Find("Simple Bar").Find("Status Fill 01")
+        Transform co2Bar = transform.Find("CO2Bar");
+        healthBar = co2Bar.Find("Simple Bar").Find("Status Fill 01")
             .gameObject.GetComponent<SimpleHealthBar>();
-        warningImages = transform.Find("Warning").gameObject;
-        backgroundImage = transform.Find("Background").gameObject;
+        backgroundImage = co2Bar.Find("Background").gameObject;
+
+        Transform warningBarT = transform.Find("WarningBar");
+        warningBar = warningBarT.gameObject;
+        eventImage = warningBarT.Find("EventName").gameObject;
 
         instance = this;
         healthBar.UpdateColor(Color.red);
         healthBar.UpdateBar(ppm, eventPeriod);
-        warningImages.SetActive(false);
+        warningBar.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,14 +55,15 @@ public class ScoreBar : MonoBehaviour
         if (ppm > eventPeriod && currentState == State.FILLING)
         {
             currentState = State.SICKO_MODE;
-            eventSprite = ClimateEvents.GetInstance().StartClimateEvent();
+            eventImage.GetComponent<Image>().sprite = ClimateEvents.GetInstance().StartClimateEvent();
+            warningBar.SetActive(true);
         }
         
         if (currentState == State.SICKO_MODE)
         {
             ppm = eventPeriod;
             SickoMode();
-            warningImages.SetActive(true);
+            warningBar.SetActive(true);
         }
 
         healthBar.UpdateBar(ppm, eventPeriod);
@@ -98,7 +103,7 @@ public class ScoreBar : MonoBehaviour
         backgroundImage.GetComponent<Image>().color = Color.black;
         sickoState = SickoState.BLACK;
         currentState = State.FILLING;
-        warningImages.SetActive(false);
+        warningBar.SetActive(false);
         ppm = 0; 
     }
 }
