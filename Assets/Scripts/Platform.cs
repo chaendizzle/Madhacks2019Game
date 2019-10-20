@@ -43,7 +43,7 @@ public class Platform : MonoBehaviour
     {
         if (Time.time > 5)
         {
-            Explode();
+            //Explode();
         }
     }
 
