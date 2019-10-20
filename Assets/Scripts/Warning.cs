@@ -17,12 +17,16 @@ public class Warning : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         StartCoroutine(Flash());
+        transform.eulerAngles = new Vector3(0f, 0f, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        Rect rect = CameraMovement.CameraRect();
+        float yPos = transform.position.y;
+        yPos = Mathf.Clamp(yPos, rect.yMin + 1.2f, rect.yMax - 1.2f);
+        transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
     }
 
     IEnumerator Flash()

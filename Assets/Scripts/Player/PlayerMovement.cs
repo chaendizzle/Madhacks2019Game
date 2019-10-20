@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     // border that the player must stay within the camera
     public float borderX = 1f;
     public float borderY = 1f;
+    PlayerInput playerInput;
 
     protected virtual void Start()
     {
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         vCollider = GetComponent<CapsuleCollider2D>();
+        playerInput = GetComponent<PlayerInput>();
         sr.flipX = false;
         squatCount = 0;
         squat = false;
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update ()
     {
+        playerInput.UpdateInput();
         body.gravityScale = gravity;
         body.drag = 0f;
         bool grounded = Grounded();
@@ -59,22 +62,22 @@ public class PlayerMovement : MonoBehaviour
         //    sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
         //}
 
-        int hDirection = (Input.GetKey("left") && !Input.GetKey("right") && Movable()) ? -1 : 
-                            (!Input.GetKey("left") && Input.GetKey("right") && Movable()) ? 1 : 0;
+        int hDirection = (playerInput.xmovement < 0 && Movable()) ? -1 : 
+                            (playerInput.xmovement > 0 && Movable()) ? 1 : 0;
 
 
         float windSpeed = 0f;
         if (ClimateEvents.GetInstance().wind && !grounded)
         {
-            windSpeed = -2f;
+            windSpeed = -4f;
         }
         if (hDirection < 0)
         {
-            body.velocity = new Vector2(-horizontalSpeed + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
+            body.velocity = new Vector2(horizontalSpeed * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
         }
         else if (hDirection > 0)
         {
-            body.velocity = new Vector2(horizontalSpeed + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
+            body.velocity = new Vector2(horizontalSpeed * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
         }
         else
         {
@@ -88,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown("up") && Jumpable())
+        if (playerInput.up && Jumpable())
         {
             animator.SetTrigger("Jumpsquat");
             if(!squat)
