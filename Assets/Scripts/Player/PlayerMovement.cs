@@ -63,13 +63,18 @@ public class PlayerMovement : MonoBehaviour
                             (!Input.GetKey("left") && Input.GetKey("right") && Movable()) ? 1 : 0;
 
 
+        float windSpeed = 0f;
+        if (ClimateEvents.GetInstance().wind && !grounded)
+        {
+            windSpeed = -2f;
+        }
         if (hDirection < 0)
         {
-            body.velocity = new Vector2(-horizontalSpeed + GetCameraSpeed() * 0.6f, body.velocity.y);
+            body.velocity = new Vector2(-horizontalSpeed + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
         }
         else if (hDirection > 0)
         {
-            body.velocity = new Vector2(horizontalSpeed + GetCameraSpeed() * 0.6f, body.velocity.y);
+            body.velocity = new Vector2(horizontalSpeed + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
         }
         else
         {

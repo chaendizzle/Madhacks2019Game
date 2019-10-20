@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shatterPlatforms: 0
-  darkenScreen: 0
-  wind: 0
+  darkenScreen: 1
+  wind: 1
   clouds: 0
   waterLevel: 0
   shrinkingPlatforms: 0
