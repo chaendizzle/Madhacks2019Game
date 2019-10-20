@@ -17,6 +17,7 @@ public class GameOver : MonoBehaviour
     {
         int score = (int)ScoreBar.GetInstance().score;
         scoreField.GetComponent<Text>().text = "Score: " + score;
+        ScoreBar.GetInstance().SetVisible(false);
         canvas.enabled = true;
     }
 

@@ -12,6 +12,7 @@ public class ScoreBar : MonoBehaviour
     private GameObject warningBar;
     private GameObject eventImage;
     private GameObject livesText;
+    private Canvas canvas;
 
     private float ppm = 0;
 
@@ -52,10 +53,17 @@ public class ScoreBar : MonoBehaviour
         Transform livesT = transform.Find("Lives");
         livesText = livesT.Find("LivesText").gameObject;
 
+        canvas = GetComponent<Canvas>();
+
         instance = this;
         healthBar.UpdateColor(Color.red);
         healthBar.UpdateBar(ppm, eventPeriod);
         warningBar.SetActive(false);
+    }
+
+    public void SetVisible(bool visible)
+    {
+        canvas.enabled = visible;
     }
 
     // Update is called once per frame
@@ -104,7 +112,9 @@ public class ScoreBar : MonoBehaviour
                 sickoState = SickoState.YELLOW;
                 break;
             case SickoState.YELLOW:
-                backgroundImage.GetComponent<Image>().color = Color.black;
+                Color b = Color.black;
+                b.a = 80f/255;
+                backgroundImage.GetComponent<Image>().color = b;
                 sickoState = SickoState.BLACK;
                 break;
         }

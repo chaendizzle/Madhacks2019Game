@@ -85,7 +85,9 @@ public class PlayerGG : MonoBehaviour
         yield return new WaitForSeconds(2);
         r2d.isKinematic = true;
         r2d.velocity = Vector3.zero;
-        transform.position = CameraMovement.CameraRect().center;
+        transform.position = new Vector3(
+            CameraMovement.CameraRect().center.x,
+            CameraMovement.CameraRect().yMax - 1, 0);
         for (int i = 0; i < 3; i++)
         {
             pm.sr.color = new Color(pm.sr.color.r, pm.sr.color.g, pm.sr.color.b, 0.5f);
