@@ -7,6 +7,7 @@ public class ScoreBar : MonoBehaviour
 {
     // Start is called before the first frame update
     public SimpleHealthBar healthBar;
+    public GameObject warningImages;
     public GameObject image; 
     public float eventPeriod;
 
@@ -23,6 +24,7 @@ public class ScoreBar : MonoBehaviour
         instance = this;
         healthBar.UpdateColor(Color.red);
         healthBar.UpdateBar(ppm, eventPeriod);
+        warningImages.active = false;
     }
 
     // Update is called once per frame
@@ -51,6 +53,7 @@ public class ScoreBar : MonoBehaviour
 
     void SickoMode()
     {
+        warningImages.active = true;
         if (Time.time - lastUpdateTime < blinkPeriod)
             return;
         lastUpdateTime = Time.time;
@@ -72,6 +75,7 @@ public class ScoreBar : MonoBehaviour
     {
         image.GetComponent<Image>().color = Color.black;
         sickoState = SickoState.BLACK;
+        warningImages.active = false;
         ppm = 0; 
     }
 }
