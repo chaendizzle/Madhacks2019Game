@@ -7,7 +7,7 @@ public class ShatterPlatform : MonoBehaviour
     public bool shattering = false;
     // when player comes within distance, this platform shatters
     public float distance = 3f;
-    public float shatterTime = 1.8f;
+    public float shatterTime = 1f;
 
     // Start is called before the first frame update
     void Start()

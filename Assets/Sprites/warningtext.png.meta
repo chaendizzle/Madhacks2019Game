@@ -14,6 +14,15 @@ TextureImporter:
   - first:
       213: 7316828665014844943
     second: warningtext_3
+  - first:
+      213: -5350163105171921528
+    second: warningtext_4
+  - first:
+      213: 745163729104112190
+    second: warningtext_5
+  - first:
+      213: 2942817609952979283
+    second: warningtext_6
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -136,7 +145,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cd56dbd5b0713940aa26796b69dda2e
+      spriteID: 710ac948f620be749901e2d0f4f276d8
       internalID: -7078539149332066768
       vertices: []
       indices: 
@@ -157,7 +166,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 335192156049d3349a06cb5a6179e4aa
+      spriteID: 9d73efa6c502da2459ab9b8f34cffe47
       internalID: -7850207434690270812
       vertices: []
       indices: 
@@ -165,6 +174,27 @@ TextureImporter:
       weights: []
     - serializedVersion: 2
       name: warningtext_2
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 77
+        width: 204
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9183655717d3c6647a992b190b5737e1
+      internalID: -903237550390242133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warningtext_3
       rect:
         serializedVersion: 2
         x: 65
@@ -178,14 +208,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a58778be36bacf43bc9e1dc865bd83a
-      internalID: -903237550390242133
+      spriteID: e1cd4328156bb86409f61c30fba68322
+      internalID: 7316828665014844943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: warningtext_3
+      name: warningtext_4
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 31
+        width: 182
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5047f03be5732044c9eaf2b49d252a1b
+      internalID: -5350163105171921528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warningtext_5
       rect:
         serializedVersion: 2
         x: 5
@@ -199,8 +250,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec58b5d754a06e545a695c21fb2dd674
-      internalID: 7316828665014844943
+      spriteID: 4f3e869b11da94f4b9884255de7d3673
+      internalID: 745163729104112190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warningtext_6
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 6
+        width: 193
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e73077987d9df6d40bdad8599c6bf02d
+      internalID: 2942817609952979283
       vertices: []
       indices: 
       edges: []
