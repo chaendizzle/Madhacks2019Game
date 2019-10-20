@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Vector2 speed = new Vector2(5f, 0f);
+    float time = 0f;
+    public float delay = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +17,16 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position + (Vector3)speed * Time.deltaTime;
+        time += Time.deltaTime;
+        if (time > delay)
+        {
+            transform.position = transform.position + (Vector3)speed * Time.deltaTime;
+        }
+    }
+
+    public bool GetMoving()
+    {
+        return time > delay;
     }
 
     public static Rect CameraRect()
