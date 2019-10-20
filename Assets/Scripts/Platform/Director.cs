@@ -21,7 +21,7 @@ public class Director : MonoBehaviour
     private float distanceGenerated;
 
     private float LOOKAHEAD_DISTANCE = 5; //distance to end of run used to trigger new run generation
-    private const float MIN_SPACING = 3f;
+    private const float MIN_SPACING = 1.3f;
     private const float MAX_SPACING = 2;
     private const int RUN_LENGTH = 10; //length of run to generate 
     private const float JUMP_SCALE = 1;
@@ -155,6 +155,7 @@ public class Director : MonoBehaviour
         float xOffsetBound = 2 * jumpVelocity * xVelocity / gravity;
         float budgetWeight = this.budgetWeight(MIN_SPACING, xOffsetBound);
         float xOffset = Random.Range(MIN_SPACING + budgetWeight, xOffsetBound);
+        //Debug.Log("Interval: " + (MIN_SPACING + budgetWeight) + " " + xOffsetBound);
 
         if (platforms.Count > 0)
         {
