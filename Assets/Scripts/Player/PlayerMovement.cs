@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         {
             windSpeed = -3f;
         }
-        Director.GetInstance().xVelocity = Mathf.Abs(horizontalSpeed) * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed;
+        Director.GetInstance().xVelocity = Mathf.Abs(horizontalSpeed) + GetCameraSpeed() * 0.6f + windSpeed;
         if (hDirection < 0)
         {
             body.velocity = new Vector2(horizontalSpeed * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
