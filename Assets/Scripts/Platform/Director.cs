@@ -86,8 +86,8 @@ public class Director : MonoBehaviour
         //create sprite from prefab and leftSide position
         public RenderedPlatform(GameObject prefab, Vector3 leftSide)
         {
-            this.width = prefab.transform.lossyScale.x * prefab.GetComponent<Renderer>().bounds.extents.x;
-            this.height = prefab.transform.lossyScale.y * prefab.GetComponent<Renderer>().bounds.extents.y;
+            this.width = prefab.transform.lossyScale.x * prefab.GetComponent<Renderer>().bounds.extents.x * 2;
+            this.height = prefab.transform.lossyScale.y * prefab.GetComponent<Renderer>().bounds.extents.y * 2;
             this.obj = Instantiate(prefab, leftSide + new Vector3(width / 2, 0, 0), Quaternion.identity);
             this.upperLeft = obj.transform.position + new Vector3(-(this.width / 2), (this.height / 2), 0);
             this.upperRight = obj.transform.position + new Vector3((this.width / 2), (this.height / 2), 0);
@@ -95,8 +95,8 @@ public class Director : MonoBehaviour
 
         public static RenderedPlatform FromUpperLeft(GameObject prefab, Vector3 upperLeft)
         {
-            float width = prefab.transform.lossyScale.x * prefab.GetComponent<Renderer>().bounds.extents.x;
-            float height = prefab.transform.lossyScale.y * prefab.GetComponent<Renderer>().bounds.extents.y;
+            float width = prefab.transform.lossyScale.x * prefab.GetComponent<Renderer>().bounds.extents.x * 2;
+            float height = prefab.transform.lossyScale.y * prefab.GetComponent<Renderer>().bounds.extents.y * 2;
             GameObject obj = Instantiate(prefab, upperLeft + new Vector3(width / 2, -(height / 2), 0), Quaternion.identity);
             Vector3 upperRight = obj.transform.position + new Vector3((width / 2), (height / 2), 0);
             return new RenderedPlatform(obj, width, height, upperLeft, upperRight);
