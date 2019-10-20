@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         vCollider = GetComponent<CapsuleCollider2D>();
+        sr.flipX = false;
     }
 
     // Update is called once per frame
@@ -34,26 +35,22 @@ public class PlayerMovement : MonoBehaviour
     {
         body.gravityScale = gravity;
         body.drag = 0f;
-        sr.flipX = false;
         bool grounded = Grounded();
-        if (grounded)
-        {
-            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
-        }
-        else
-        {
-            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
-        }
 
-        int hDirection = 0;
-        if (Input.GetKey("left") && Movable())
-        {
-            hDirection--;
-        }
-        if (Input.GetKey("right") && Movable())
-        {
-            hDirection++;
-        }
+        //Tests Grounded()
+        //if (grounded)
+        //{
+        //    sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+        //}
+        //else
+        //{
+        //    sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
+        //}
+
+        int hDirection = (Input.GetKey("left") && !Input.GetKey("right") && Movable()) ? -1 : 
+                            (!Input.GetKey("left") && Input.GetKey("right") && Movable()) ? 1 : 0;
+
+
         if (hDirection < 0)
         {
             body.velocity = new Vector2(-horizontalSpeed + GetCameraSpeed() * 0.6f, body.velocity.y);
@@ -78,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown("up") && Jumpable())
         {
             body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+            animator.SetTrigger("Jumpsquat");
         }
 
         // animate with blend tree
@@ -90,15 +88,20 @@ public class PlayerMovement : MonoBehaviour
         //animator.SetFloat("VelocityY", Mathf.Sign(body.velocity.y));
         //animator.SetBool("Grounded", grounded);
 
-        // clamp to camera rect
-        Rect camera = CameraMovement.CameraRect();
-        camera.xMin += borderX;
-        camera.xMax -= borderX;
-        camera.yMin += borderY;
-        camera.yMax -= borderY;
-        float posX = Mathf.Clamp(transform.position.x, camera.xMin, camera.xMax);
-        float posY = Mathf.Clamp(transform.position.y, camera.yMin, camera.yMax);
-        // transform.position = new Vector3(posX, posY, transform.position.z);
+        if (hDirection > 0)
+        {
+            sr.flipX = false;
+        }
+        else if (hDirection < 0)
+        {
+            sr.flipX = true;
+        }
+
+        // Set all animation indicators
+        animator.SetFloat("VelocityX", body.velocity.x);
+        animator.SetFloat("VelocityY", body.velocity.y);
+        animator.SetBool("Grounded", grounded);
+        animator.SetBool("Run", (body.velocity.x > 0 || body.velocity.x < 0) && grounded);
     }
 
     protected virtual bool Jumpable()
