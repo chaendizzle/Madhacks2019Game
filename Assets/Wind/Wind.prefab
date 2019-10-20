@@ -4840,6 +4840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4146446848845306}
   - component: {fileID: 489000507}
+  - component: {fileID: 5374823358040822680}
   m_Layer: 0
   m_Name: Wind
   m_TagString: Untagged
@@ -4864,6 +4865,18 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &489000507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331319332554932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9087d2f14795b4987e17fdd9160f03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5374823358040822680
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
