@@ -75,12 +75,10 @@ public class PlayerMovement : MonoBehaviour
         if (hDirection < 0)
         {
             body.velocity = new Vector2(horizontalSpeed * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
-            Debug.Log("Left: " + body.velocity.x);
         }
         else if (hDirection > 0)
         {
             body.velocity = new Vector2(horizontalSpeed * playerInput.xmovement + GetCameraSpeed() * 0.6f + windSpeed, body.velocity.y);
-            Debug.Log("Right: " + body.velocity.x);
         }
         else
         {
