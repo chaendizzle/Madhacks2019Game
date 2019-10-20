@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class ScoreBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public SimpleHealthBar healthBar;
-    public GameObject warningImages;
-    public GameObject image; 
     public float eventPeriod;
 
+    private SimpleHealthBar healthBar;
+    private GameObject warningImages;
+    private GameObject backgroundImage; 
+
     private float ppm = 0;
+    private Sprite eventSprite;
 
     private static ScoreBar instance;
     public static ScoreBar GetInstance()
@@ -21,10 +22,15 @@ public class ScoreBar : MonoBehaviour
 
     void Start()
     {
+        healthBar = transform.Find("Simple Bar").Find("Status Fill 01")
+            .gameObject.GetComponent<SimpleHealthBar>();
+        warningImages = transform.Find("Warning").gameObject;
+        backgroundImage = transform.Find("Background").gameObject;
+
         instance = this;
         healthBar.UpdateColor(Color.red);
         healthBar.UpdateBar(ppm, eventPeriod);
-        warningImages.active = false;
+        warningImages.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,8 +42,8 @@ public class ScoreBar : MonoBehaviour
         if (ppm > eventPeriod)
         {
             SickoMode();
-            //go sicko mode
-            //TODO: trigger event
+            eventSprite = ClimateEvents.GetInstance().StartClimateEvent();
+            warningImages.SetActive(true);
         }
 
         healthBar.UpdateBar(ppm, eventPeriod);
@@ -53,18 +59,17 @@ public class ScoreBar : MonoBehaviour
 
     void SickoMode()
     {
-        warningImages.active = true;
         if (Time.time - lastUpdateTime < blinkPeriod)
             return;
         lastUpdateTime = Time.time;
         switch (sickoState) 
         {
             case SickoState.BLACK:
-                image.GetComponent<Image>().color = Color.yellow;
+                backgroundImage.GetComponent<Image>().color = Color.yellow;
                 sickoState = SickoState.YELLOW;
                 break;
             case SickoState.YELLOW:
-                image.GetComponent<Image>().color = Color.black;
+                backgroundImage.GetComponent<Image>().color = Color.black;
                 sickoState = SickoState.BLACK;
                 break;
         }
@@ -73,9 +78,9 @@ public class ScoreBar : MonoBehaviour
     //reset the bar after event
     public void Reset()
     {
-        image.GetComponent<Image>().color = Color.black;
+        backgroundImage.GetComponent<Image>().color = Color.black;
         sickoState = SickoState.BLACK;
-        warningImages.active = false;
+        warningImages.SetActive(false);
         ppm = 0; 
     }
 }
