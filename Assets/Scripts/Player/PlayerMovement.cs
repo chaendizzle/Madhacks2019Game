@@ -6,6 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
     public float horizontalSpeed;
     public float jumpSpeed;
+    private readonly float MAXFALLSPEED = -10;
+    private bool squat;
+    private readonly int SQUATLENGTH = 3;
+    private int squatCount;
     private float gravity;
     private Sprite[] gasSprites;
 
@@ -22,11 +26,14 @@ public class PlayerMovement : MonoBehaviour
 
     protected virtual void Start()
     {
-        gravity = 0.9f;
+        gravity = 3.6f;
         sr = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         vCollider = GetComponent<CapsuleCollider2D>();
+        sr.flipX = false;
+        squatCount = 0;
+        squat = false;
     }
 
     // Update is called once per frame
@@ -34,26 +41,27 @@ public class PlayerMovement : MonoBehaviour
     {
         body.gravityScale = gravity;
         body.drag = 0f;
-        sr.flipX = false;
         bool grounded = Grounded();
-        if (grounded)
+
+        if (squat)
         {
-            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
-        }
-        else
-        {
-            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
+            squatCount++;
         }
 
-        int hDirection = 0;
-        if (Input.GetKey("left") && Movable())
-        {
-            hDirection--;
-        }
-        if (Input.GetKey("right") && Movable())
-        {
-            hDirection++;
-        }
+        //Tests Grounded()
+        //if (grounded)
+        //{
+        //    sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
+        //}
+        //else
+        //{
+        //    sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
+        //}
+
+        int hDirection = (Input.GetKey("left") && !Input.GetKey("right") && Movable()) ? -1 : 
+                            (!Input.GetKey("left") && Input.GetKey("right") && Movable()) ? 1 : 0;
+
+
         if (hDirection < 0)
         {
             body.velocity = new Vector2(-horizontalSpeed + GetCameraSpeed() * 0.6f, body.velocity.y);
@@ -73,12 +81,32 @@ public class PlayerMovement : MonoBehaviour
                 body.velocity = new Vector2(GetCameraSpeed() * 0.6f, body.velocity.y);
             }
         }
-        
 
         if (Input.GetKeyDown("up") && Jumpable())
         {
-            body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+            animator.SetTrigger("Jumpsquat");
+            if(!squat)
+                squat = true;
         }
+
+        if (squatCount == SQUATLENGTH)
+        {
+            squat = false;
+            squatCount = 0;
+
+            body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+
+            // Change jump height based on if key is held
+            //if (Input.GetKeyDown("up"))
+            //{
+            //    body.velocity = new Vector2(body.velocity.x, jumpSpeed);
+            //}
+            //else
+            //{
+            //    body.velocity = new Vector2(body.velocity.x, (int) 0.5 * jumpSpeed);
+            //}
+        }
+
 
         // animate with blend tree
         //animator.SetFloat("VelocityX", hDirection);
@@ -90,15 +118,25 @@ public class PlayerMovement : MonoBehaviour
         //animator.SetFloat("VelocityY", Mathf.Sign(body.velocity.y));
         //animator.SetBool("Grounded", grounded);
 
-        // clamp to camera rect
-        Rect camera = CameraMovement.CameraRect();
-        camera.xMin += borderX;
-        camera.xMax -= borderX;
-        camera.yMin += borderY;
-        camera.yMax -= borderY;
-        float posX = Mathf.Clamp(transform.position.x, camera.xMin, camera.xMax);
-        float posY = Mathf.Clamp(transform.position.y, camera.yMin, camera.yMax);
-        // transform.position = new Vector3(posX, posY, transform.position.z);
+        if (hDirection > 0)
+        {
+            sr.flipX = false;
+        }
+        else if (hDirection < 0)
+        {
+            sr.flipX = true;
+        }
+
+        if (body.velocity.y < MAXFALLSPEED)
+        {
+            body.velocity = new Vector2(body.velocity.x, MAXFALLSPEED);
+        }
+
+        // Set all animation indicators
+        animator.SetFloat("VelocityX", body.velocity.x);
+        animator.SetFloat("VelocityY", body.velocity.y);
+        animator.SetBool("Grounded", grounded);
+        animator.SetBool("Run", (body.velocity.x > 0 || body.velocity.x < 0) && grounded);
     }
 
     protected virtual bool Jumpable()
