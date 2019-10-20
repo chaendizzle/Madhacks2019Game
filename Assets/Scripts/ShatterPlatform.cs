@@ -7,7 +7,7 @@ public class ShatterPlatform : MonoBehaviour
     public bool shattering = false;
     // when player comes within distance, this platform shatters
     public float distance = 3f;
-    public float shatterTime = 1f;
+    public float shatterTime = 1.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class ShatterPlatform : MonoBehaviour
         Rect rect = CameraMovement.CameraRect();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if ((player != null && !shattering &&
-            Mathf.Abs(transform.position.x - player.transform.position.x) < distance) || player.transform.position.y > rect.yMax)
+            Mathf.Abs(transform.position.x - player.transform.position.x) < distance) || transform.position.y > rect.yMax)
         {
             shattering = true;
             StartCoroutine(Shatter());

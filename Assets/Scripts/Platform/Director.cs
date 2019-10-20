@@ -77,8 +77,8 @@ public class Director : MonoBehaviour
         public RenderedPlatform(GameObject obj)
         {
             this.obj = obj;
-            this.width = obj.transform.lossyScale.x * obj.GetComponent<Renderer>().bounds.extents.x;
-            this.height = obj.transform.lossyScale.y * obj.GetComponent<Renderer>().bounds.extents.y;
+            this.width = obj.transform.lossyScale.x * obj.GetComponent<Renderer>().bounds.extents.x * 2;
+            this.height = obj.transform.lossyScale.y * obj.GetComponent<Renderer>().bounds.extents.y * 2;
             this.upperLeft = obj.transform.position + new Vector3(-(this.width / 2), (this.height / 2), 0);
             this.upperRight = obj.transform.position + new Vector3((this.width / 2), (this.height / 2), 0);
         }
