@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     protected Animator animator;
     protected Rigidbody2D body;
-    protected SpriteRenderer sr;
+    public SpriteRenderer sr;
     protected Collider2D vCollider;
 
  	[HideInInspector] public int facingX = -1;

@@ -39,7 +39,7 @@ public class PlayerGG : MonoBehaviour
     {
         ScoreBar.GetInstance().SetLives(lives);
         Rect cameraRect = CameraMovement.CameraRect();
-        if (!cameraRect.Contains(transform.position) && state == State.ALIVE)
+        if ((transform.position.y < cameraRect.yMin || transform.position.x < cameraRect.xMin) && state == State.ALIVE)
         {
             Die(); 
         }
@@ -86,7 +86,13 @@ public class PlayerGG : MonoBehaviour
         r2d.isKinematic = true;
         r2d.velocity = Vector3.zero;
         transform.position = CameraMovement.CameraRect().center;
-        yield return new WaitForSeconds(2);
+        for (int i = 0; i < 3; i++)
+        {
+            pm.sr.color = new Color(pm.sr.color.r, pm.sr.color.g, pm.sr.color.b, 0.5f);
+            yield return new WaitForSeconds(0.3f);
+            pm.sr.color = new Color(pm.sr.color.r, pm.sr.color.g, pm.sr.color.b, 1f);
+            yield return new WaitForSeconds(0.3f);
+        }
         r2d.isKinematic = false;
         c2d.enabled = true;
         cp2d.enabled = true;
