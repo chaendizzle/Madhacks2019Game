@@ -85,6 +85,7 @@ public class ClimateEvents : MonoBehaviour
         {
             case "RisingSeaLevel":
                 waterLevel = true;
+                shatterPlatforms = true;
                 break;
             case "ArcticErosion":
                 shatterPlatforms = true;

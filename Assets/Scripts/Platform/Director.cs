@@ -21,7 +21,7 @@ public class Director : MonoBehaviour
     private float distanceGenerated;
 
     private float LOOKAHEAD_DISTANCE = 5; //distance to end of run used to trigger new run generation
-    private const float MIN_SPACING = 1;
+    private const float MIN_SPACING = 1.5f;
     private const float MAX_SPACING = 2;
     private const int RUN_LENGTH = 10; //length of run to generate 
     private const float JUMP_SCALE = 1;
@@ -30,12 +30,7 @@ public class Director : MonoBehaviour
     static Director instance;
     public static Director GetInstance()
     {
-        if (Director.instance == null)
-        {
-            return new Director();
-        }
-
-        return instance;
+        return GameObject.FindGameObjectWithTag("Director").GetComponent<Director>();
     }
 
     //Interface instance used for sorting platformPrefabs
@@ -179,7 +174,8 @@ public class Director : MonoBehaviour
             while (distanceGenerated < targetDistance) 
             {
                 RenderedPlatform platform = (Random.value > 0.5) ? GenerateStaticHeightPlatform(cameraView) :
-                    GenerateVariableHightPlatform(cameraView);
+                    (ClimateEvents.GetInstance().waterLevel ? GenerateStaticHeightPlatform(cameraView) : GenerateVariableHightPlatform(cameraView));
+                Debug.Log(platform.obj.name);
                 distanceGenerated = platform.upperRight.x;
                 platforms.Add(platform);
             }
