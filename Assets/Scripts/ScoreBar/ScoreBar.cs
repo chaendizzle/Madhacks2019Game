@@ -11,8 +11,12 @@ public class ScoreBar : MonoBehaviour
     private GameObject backgroundImage;
     private GameObject warningBar;
     private GameObject eventImage;
+    private GameObject livesText;
 
     private float ppm = 0;
+
+    [HideInInspector]
+    public float score = 0;
 
     private static ScoreBar instance;
     
@@ -29,6 +33,11 @@ public class ScoreBar : MonoBehaviour
         return instance;
     }
 
+    public void SetLives(int lives)
+    {
+        livesText.GetComponent<Text>().text = "Lives: " + lives;
+    }
+
     void Start()
     {
         Transform co2Bar = transform.Find("CO2Bar");
@@ -39,6 +48,9 @@ public class ScoreBar : MonoBehaviour
         Transform warningBarT = transform.Find("WarningBar");
         warningBar = warningBarT.gameObject;
         eventImage = warningBarT.Find("EventName").gameObject;
+
+        Transform livesT = transform.Find("Lives");
+        livesText = livesT.Find("LivesText").gameObject;
 
         instance = this;
         healthBar.UpdateColor(Color.red);
@@ -51,6 +63,7 @@ public class ScoreBar : MonoBehaviour
     {
         //TODO: only update if player is alive
         ppm += Time.deltaTime;
+        score += Time.deltaTime * 6;
 
         if (ppm > eventPeriod && currentState == State.FILLING)
         {

@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         return true;
     }
 
-    protected bool Grounded()
+    public bool Grounded()
     {
         return CheckRaycastGround(Vector2.zero) ||
             CheckRaycastGround(Vector2.left * (vCollider.bounds.extents.x + vCollider.offset.x)) ||

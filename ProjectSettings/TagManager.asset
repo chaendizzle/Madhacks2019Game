@@ -19,6 +19,8 @@ TagManager:
   - Fragment
   - ClimateEventsHandler
   - Director
+  - Water
+  - GameOver
   layers:
   - Default
   - TransparentFX
