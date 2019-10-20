@@ -12,6 +12,7 @@ public class ScoreBar : MonoBehaviour
     private GameObject warningBar;
     private GameObject eventImage;
     private GameObject livesText;
+    private GameObject scoreText;
     private Canvas canvas;
 
     private float ppm = 0;
@@ -45,6 +46,7 @@ public class ScoreBar : MonoBehaviour
         healthBar = co2Bar.Find("Simple Bar").Find("Status Fill 01")
             .gameObject.GetComponent<SimpleHealthBar>();
         backgroundImage = co2Bar.Find("Background").gameObject;
+        scoreText = co2Bar.Find("PPMCounter").gameObject;
 
         Transform warningBarT = transform.Find("WarningBar");
         warningBar = warningBarT.gameObject;
@@ -72,6 +74,8 @@ public class ScoreBar : MonoBehaviour
         //TODO: only update if player is alive
         ppm += Time.deltaTime;
         score += Time.deltaTime * 6;
+
+        scoreText.GetComponent<Text>().text = ((int)score).ToString();
 
         if (ppm > eventPeriod && currentState == State.FILLING)
         {
