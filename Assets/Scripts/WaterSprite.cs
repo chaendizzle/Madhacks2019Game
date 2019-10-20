@@ -7,6 +7,9 @@ public class WaterSprite : MonoBehaviour
     public float targetHeight = 0f;
     public float height = 0f;
     public float speed = 0.25f;
+    public float transitionRate = 0.5f;
+    float darkness;
+    SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +18,7 @@ public class WaterSprite : MonoBehaviour
         transform.localScale = CameraMovement.CameraRect().size * 5f;
         SetHeight(-3.9f);
         targetHeight = -3.9f;
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -33,6 +37,23 @@ public class WaterSprite : MonoBehaviour
         {
             targetHeight = -3.9f;
         }
+
+        float targetDarkness;
+        if (ClimateEvents.GetInstance().darkenScreen)
+        {
+            targetDarkness = 0.8f;
+        }
+        else
+        {
+            targetDarkness = 0f;
+        }
+
+        darkness = Mathf.Lerp(darkness, targetDarkness, transitionRate * Time.deltaTime);
+        if (Mathf.Abs(darkness - targetDarkness) < 0.01f)
+        {
+            darkness = targetDarkness;
+        }
+        sr.color = new Color(1f - darkness, 1f - darkness, 1f - darkness);
     }
 
     public void SetHeight(float y)
