@@ -108,6 +108,11 @@ public class Director : MonoBehaviour
         return platforms.Select(x => x.obj);
     }
 
+    private float budgetWeight(float lowerBound, float upperBound)
+    {
+        return (upperBound - lowerBound) * Mathf.Pow(2, -platformBudget);
+    }
+
     RenderedPlatform GenerateVariableHightPlatform(Rect cameraRect)
     {
 
@@ -122,7 +127,8 @@ public class Director : MonoBehaviour
         float xOffsetBound = (
             Mathf.Sqrt(jumpVelocity * jumpVelocity * xVelocity * xVelocity - (2 * gravity * xVelocity * xVelocity * yOffset)) 
             + jumpVelocity * xVelocity) / gravity;
-        float xOffset = Random.Range(MIN_SPACING, xOffsetBound);
+        float budgetWeight = this.budgetWeight(MIN_SPACING, xOffsetBound);
+        float xOffset = Random.Range(MIN_SPACING + budgetWeight, xOffsetBound);
 
         if (platforms.Count > 0)
         {
@@ -147,7 +153,8 @@ public class Director : MonoBehaviour
 
         //determine spacing
         float xOffsetBound = 2 * jumpVelocity * xVelocity / gravity;
-        float xOffset = Random.Range(MIN_SPACING, xOffsetBound);
+        float budgetWeight = this.budgetWeight(MIN_SPACING, xOffsetBound);
+        float xOffset = Random.Range(MIN_SPACING + budgetWeight, xOffsetBound);
 
         if (platforms.Count > 0)
         {
@@ -175,7 +182,6 @@ public class Director : MonoBehaviour
             {
                 RenderedPlatform platform = (Random.value > 0.5) ? GenerateStaticHeightPlatform(cameraView) :
                     (ClimateEvents.GetInstance().waterLevel ? GenerateStaticHeightPlatform(cameraView) : GenerateVariableHightPlatform(cameraView));
-                Debug.Log(platform.obj.name);
                 distanceGenerated = platform.upperRight.x;
                 platforms.Add(platform);
             }
