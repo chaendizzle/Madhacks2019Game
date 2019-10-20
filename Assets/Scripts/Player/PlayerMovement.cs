@@ -81,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
                 body.velocity = new Vector2(GetCameraSpeed() * 0.6f, body.velocity.y);
             }
         }
-        
 
         if (Input.GetKeyDown("up") && Jumpable())
         {

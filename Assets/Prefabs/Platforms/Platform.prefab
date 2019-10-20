@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4837467059614263598}
   - component: {fileID: 4869092506627670841}
   - component: {fileID: 4869092506627670842}
+  - component: {fileID: -5293243194951560125}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -154,3 +155,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68792974f780fc743b857f28124ed406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5293243194951560125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4869092506627670840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75953d6b31f574644be1238b08e89b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowRuntimeFragmentation: 0
+  extraPoints: 0
+  subshatterSteps: 0
+  fragmentLayer: Default
+  sortingLayerName: Default
+  orderInLayer: 0
+  shatterType: 0
+  fragments: []
