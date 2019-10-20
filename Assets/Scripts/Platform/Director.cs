@@ -180,7 +180,7 @@ public class Director : MonoBehaviour
             float targetDistance = distanceGenerated + RUN_LENGTH;
             while (distanceGenerated < targetDistance) 
             {
-                RenderedPlatform platform = (Random.value > 0.5) ? GenerateStaticHeightPlatform(cameraView) :
+                RenderedPlatform platform = (Random.value > 0.65) ? GenerateStaticHeightPlatform(cameraView) :
                     (ClimateEvents.GetInstance().waterLevel ? GenerateStaticHeightPlatform(cameraView) : GenerateVariableHightPlatform(cameraView));
                 distanceGenerated = platform.upperRight.x;
                 platforms.Add(platform);
