@@ -14,7 +14,8 @@ public class Director : MonoBehaviour
     public float jumpVelocity;
     public float xVelocity;
     public float gravity;
-    public float bufferDistance;
+    public float xBufferDistance;
+    public float yBufferDistance;
 
     private float distanceGenerated;
 
@@ -115,9 +116,7 @@ public class Director : MonoBehaviour
         //pick random height difference over interval (-inf, 0.5*v0^2/g)
         float yOffsetBound = 0.5f * Mathf.Pow(jumpVelocity, 2) /  gravity;
 
-
         float yOffset = Random.Range(0, yOffsetBound);
-        yOffset = Mathf.Clamp(yOffset, cameraRect.yMin + bufferDistance, cameraRect.yMax - bufferDistance);
 
         float xOffsetBound = (
             Mathf.Sqrt(jumpVelocity * jumpVelocity * xVelocity * xVelocity - (2 * gravity * xVelocity * xVelocity * yOffset)) 
@@ -127,8 +126,10 @@ public class Director : MonoBehaviour
         if (platforms.Count > 0)
         {
             RenderedPlatform previous = platforms[platforms.Count - 1];
+            float yPosition = Mathf.Clamp(previous.upperRight.y + yOffset,
+                cameraRect.yMin + xBufferDistance, cameraRect.yMax - yBufferDistance);
             return RenderedPlatform.FromUpperLeft(prefab,
-                new Vector3(previous.upperRight.x + xOffset, previous.upperRight.y + yOffset, 0));
+                new Vector3(previous.upperRight.x + xOffset, yPosition, 0));
         }
         else
         {

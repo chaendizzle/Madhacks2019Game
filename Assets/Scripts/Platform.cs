@@ -5,6 +5,7 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     GameObject bottom = null;
+    public GameObject warningPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +44,7 @@ public class Platform : MonoBehaviour
     {
         if (Time.time > 5)
         {
-            Explode();
+            //Explode();
         }
     }
 
