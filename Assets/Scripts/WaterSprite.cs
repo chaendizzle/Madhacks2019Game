@@ -23,5 +23,6 @@ public class WaterSprite : MonoBehaviour
         float yPos = (y + camera.yMin) * 0.5f;
         transform.position = new Vector3(transform.position.x, yPos, transform.position.z);
         transform.localScale = new Vector3(transform.localScale.x, camera.yMin - y - 1f, transform.localScale.z);
+        transform.Find("WaterBottom").transform.position = transform.position + Vector3.down * 0.75f;
     }
 }

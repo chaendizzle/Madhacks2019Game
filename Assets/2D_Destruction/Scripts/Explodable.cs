@@ -83,6 +83,12 @@ public class Explodable : MonoBehaviour
         fragments.Clear();
         polygons.Clear();
     }
+
+    public List<GameObject> getFragments()
+    {
+        return fragments;
+    }
+
     /// <summary>
     /// Turns Gameobject into multiple fragments
     /// </summary>
@@ -109,6 +115,7 @@ public class Explodable : MonoBehaviour
                 p.layer = LayerMask.NameToLayer(fragmentLayer);
                 p.GetComponent<Renderer>().sortingLayerName = sortingLayerName;
                 p.GetComponent<Renderer>().sortingOrder = orderInLayer;
+                p.tag = "Fragment";
             }
         }
 
