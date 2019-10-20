@@ -26,17 +26,38 @@ public class Platform : MonoBehaviour
                 bottom.transform.localScale.z);
         }
 
+        UpdateClimateEvents();
+    }
+    
+    public void UpdateClimateEvents()
+    {
         // handle climate events
         if (ClimateEvents.GetInstance().shatterPlatforms)
         {
             gameObject.AddComponent<ShatterPlatform>();
         }
+        else
+        {
+            ShatterPlatform shatform = gameObject.GetComponent<ShatterPlatform>();
+            if (shatform != null && !shatform.shattering)
+            {
+                Destroy(shatform);
+            }
+        }
         if (ClimateEvents.GetInstance().shrinkingPlatforms)
         {
             gameObject.AddComponent<ShrinkPlatform>();
         }
+        else
+        {
+            ShrinkPlatform shrinkform = gameObject.GetComponent<ShrinkPlatform>();
+            if (shrinkform != null && !shrinkform.shrinking)
+            {
+                Destroy(shrinkform);
+            }
+        }
     }
-    
+
     bool exploded = false;
     public void Explode()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShrinkPlatform : MonoBehaviour
 {
-    bool shrinking = false;
+    public bool shrinking = false;
     // when player comes within distance, this platform shatters
     public float distance = 5f;
     public float shrinkTime = 1.8f;

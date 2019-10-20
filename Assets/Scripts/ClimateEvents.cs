@@ -53,8 +53,22 @@ public class ClimateEvents : MonoBehaviour
     IEnumerator RunClimateEvent(string name, float time)
     {
         SetClimateEvent(name);
+        foreach (GameObject go in Director.GetInstance().GetPlatforms())
+        {
+            if (go != null)
+            {
+                go.GetComponent<Platform>().UpdateClimateEvents();
+            }
+        }
         yield return new WaitForSeconds(time);
         SetClimateEvent("None");
+        foreach (GameObject go in Director.GetInstance().GetPlatforms())
+        {
+            if (go != null)
+            {
+                go.GetComponent<Platform>().UpdateClimateEvents();
+            }
+        }
         ScoreBar.GetInstance().Reset();
         current = null;
     }

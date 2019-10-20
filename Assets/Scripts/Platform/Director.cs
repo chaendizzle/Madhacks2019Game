@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -105,6 +106,11 @@ public class Director : MonoBehaviour
             Vector3 upperRight = obj.transform.position + new Vector3((width / 2), (height / 2), 0);
             return new RenderedPlatform(obj, width, height, upperLeft, upperRight);
         }
+    }
+
+    public IEnumerable<GameObject> GetPlatforms()
+    {
+        return platforms.Select(x => x.obj);
     }
 
     RenderedPlatform GenerateVariableHightPlatform(Rect cameraRect)

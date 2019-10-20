@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShatterPlatform : MonoBehaviour
 {
-    bool shattering = false;
+    public bool shattering = false;
     // when player comes within distance, this platform shatters
     public float distance = 3f;
     public float shatterTime = 1.8f;

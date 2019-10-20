@@ -3,11 +3,11 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
 public class SimpleHealthBarWindow : EditorWindow
 {
 	static string version = "1.0.3f";// ALWAYS UDPATE
-	static int importantChanges = 0;// UPDATE ON IMPORTANT CHANGES
 	static string menuTitle = "Main Menu";
 
 	// LAYOUT STYLES //
@@ -52,9 +52,8 @@ public class SimpleHealthBarWindow : EditorWindow
 	}
 	FontSize fontSize = FontSize.Small;
 	bool configuredFontSize = false;
-
-	static Texture2D introThumbnail;
-	static WWW introThumbnailPage;
+    
+	static UnityWebRequest introThumbnailPage;
 
 	
 	class DocumentationInfo
@@ -618,7 +617,6 @@ public class SimpleHealthBarWindow : EditorWindow
 		
 		EditorGUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
-		GUILayout.Label( introThumbnail );
 
 		var rect = GUILayoutUtility.GetLastRect();
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
@@ -777,59 +775,6 @@ public class SimpleHealthBarWindow : EditorWindow
 		get
 		{
 			return "    ";
-		}
-	}
-
-	[InitializeOnLoad]
-	class SimpleHealthBarInitialLoad
-	{
-		static SimpleHealthBarInitialLoad ()
-		{
-			// If this is the first time that the user has downloaded this package...
-			if( !EditorPrefs.HasKey( "SimpleHealthBarFreeVersion" ) )
-			{
-				// Navigate to the Thank You page.
-				NavigateForward( thankYou );
-
-				// Set the version to current so they won't see these version changes.
-				EditorPrefs.SetInt( "SimpleHealthBarFreeVersion", importantChanges );
-
-				introThumbnailPage = new WWW( "https://www.tankandhealerstudio.com/uploads/7/7/4/9/77490188/shb-free-intro-thumb-small_orig.png" );
-
-				EditorApplication.update += WaitForIntroThumbnail;
-			}
-			else if( EditorPrefs.GetInt( "SimpleHealthBarFreeVersion" ) < importantChanges )
-			{
-				// Navigate to the Version Changes page.
-				NavigateForward( versionChanges );
-
-				// Set the version to current so they won't see this page again.
-				EditorPrefs.SetInt( "SimpleHealthBarFreeVersion", importantChanges );
-
-				EditorApplication.update += WaitForCompile;
-			}
-		}
-
-		static void WaitForCompile ()
-		{
-			if( EditorApplication.isCompiling )
-				return;
-
-			EditorApplication.update -= WaitForCompile;
-
-			InitializeWindow();
-		}
-
-		static void WaitForIntroThumbnail ()
-		{
-			if( !introThumbnailPage.isDone || EditorApplication.isCompiling )
-				return;
-
-			EditorApplication.update -= WaitForIntroThumbnail;
-
-			InitializeWindow();
-
-			introThumbnail = introThumbnailPage.texture;
 		}
 	}
 }
