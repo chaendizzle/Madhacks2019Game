@@ -9,6 +9,14 @@ TagManager:
   - Ram
   - Cinemachine
   - Key
+  - ground
+  - Obstacle
+  - BombPickup
+  - Enemy
+  - ExplosionFX
+  - Bullet
+  - HealthBar
+  - Fragment
   layers:
   - Default
   - TransparentFX
@@ -18,7 +26,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 
@@ -48,4 +56,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3637556995
     locked: 0
