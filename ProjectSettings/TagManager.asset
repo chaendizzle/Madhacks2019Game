@@ -18,6 +18,7 @@ TagManager:
   - HealthBar
   - Fragment
   - ClimateEventsHandler
+  - Director
   layers:
   - Default
   - TransparentFX
