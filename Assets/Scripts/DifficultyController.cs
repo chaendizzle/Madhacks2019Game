@@ -11,6 +11,6 @@ public class DifficultyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Director.GetInstance().platformBudget = (secondsUntilMinDifficulty / Time.time) + (minDifficulty - 1);
+        Director.GetInstance().platformBudget = (secondsUntilMinDifficulty / Mathf.Max(1, Mathf.Log(Time.time / 0.5f))) + (minDifficulty - 1);
     }
 }
