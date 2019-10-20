@@ -16,6 +16,7 @@ TagManager:
   - ExplosionFX
   - Bullet
   - HealthBar
+  - Fragment
   layers:
   - Default
   - TransparentFX
