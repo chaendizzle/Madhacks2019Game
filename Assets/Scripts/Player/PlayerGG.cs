@@ -13,16 +13,16 @@ public class PlayerGG : MonoBehaviour
     private Rigidbody2D r2d;
     private PlayerMovement pm;
 
-    private enum State
+    public enum State
     {
         ALIVE,
         RESPAWNING,
         DEAD
     }
 
-    private State state;
+    [HideInInspector] public State state;
 
-    public PlayerGG GetInstance()
+    public static PlayerGG GetInstance()
     {
         return GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGG>();
     }

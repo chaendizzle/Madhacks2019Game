@@ -22,7 +22,7 @@ public class ShrinkPlatform : MonoBehaviour
     void Update()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null && !shrinking &&
+        if (player != null && !shrinking && PlayerGG.GetInstance().state == PlayerGG.State.ALIVE &&
             Mathf.Abs(transform.position.x - player.transform.position.x) < distance)
         {
             shrinking = true;
