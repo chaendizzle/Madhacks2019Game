@@ -20,8 +20,8 @@ public class ShatterPlatform : MonoBehaviour
     {
         Rect rect = CameraMovement.CameraRect();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if ((player != null && !shattering && PlayerGG.GetInstance().state == PlayerGG.State.ALIVE &&
-            Mathf.Abs(transform.position.x - player.transform.position.x) < distance) || transform.position.y > rect.yMax)
+        if (player != null && !shattering && PlayerGG.GetInstance().state == PlayerGG.State.ALIVE &&
+            (Mathf.Abs(transform.position.x - player.transform.position.x) < distance || transform.position.y > rect.yMax))
         {
             shattering = true;
             StartCoroutine(Shatter());
