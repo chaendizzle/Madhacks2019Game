@@ -101,9 +101,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        animator.SetBool("Jumpsquat", playerInput.up && Jumpable());
         if (playerInput.up && Jumpable())
         {
-            animator.SetTrigger("Jumpsquat");
             if(!squat)
                 squat = true;
         }
