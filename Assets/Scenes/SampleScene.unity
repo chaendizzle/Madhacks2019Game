@@ -624,6 +624,16 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114004911605563562, guid: 81445e500edb86842abbd3e0619e0ae2,
+        type: 3}
+      propertyPath: inputEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400881750773030585, guid: 81445e500edb86842abbd3e0619e0ae2,
+        type: 3}
+      propertyPath: respawnTime
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81445e500edb86842abbd3e0619e0ae2, type: 3}
 --- !u!1001 &137451260
@@ -695,6 +705,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c6956c62ba93d04189800967919cf80, type: 3}
+--- !u!1 &150348911 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5114865697722728994, guid: 9432ea0941d27d84d8a7a7fa11a431e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 96844824}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &314268103
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,11 +1010,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Director
       objectReference: {fileID: 0}
-    - target: {fileID: 9189240405471876022, guid: d44541333387d7a4bb3df5a16ff8be55,
-        type: 3}
-      propertyPath: m_TagString
-      value: Director
-      objectReference: {fileID: 0}
     - target: {fileID: 9189240405471876016, guid: d44541333387d7a4bb3df5a16ff8be55,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1056,29 +1067,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9189240405471876023, guid: d44541333387d7a4bb3df5a16ff8be55,
         type: 3}
-      propertyPath: startingPlatform
+      propertyPath: startingPlatforms.Array.data[0]
       value: 
       objectReference: {fileID: 1390953735}
     - target: {fileID: 9189240405471876023, guid: d44541333387d7a4bb3df5a16ff8be55,
         type: 3}
-      propertyPath: yBufferDistance
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9189240405471876023, guid: d44541333387d7a4bb3df5a16ff8be55,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9189240405471876023, guid: d44541333387d7a4bb3df5a16ff8be55,
-        type: 3}
-      propertyPath: jumpVelocity
-      value: 12.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9189240405471876023, guid: d44541333387d7a4bb3df5a16ff8be55,
-        type: 3}
-      propertyPath: gravity
-      value: 40
-      objectReference: {fileID: 0}
+      propertyPath: startingPlatforms.Array.data[1]
+      value: 
+      objectReference: {fileID: 150348911}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d44541333387d7a4bb3df5a16ff8be55, type: 3}
 --- !u!1001 &628106601

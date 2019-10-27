@@ -23,7 +23,10 @@ public class PlayerMovement : MonoBehaviour
     // border that the player must stay within the camera
     public float borderX = 1f;
     public float borderY = 1f;
-    PlayerInput playerInput;
+
+    private PlayerInput playerInput;
+
+    public bool inputEnabled = true;
 
     protected virtual void Start()
     {
@@ -41,6 +44,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update ()
     {
+        if (!inputEnabled)
+        {
+            UpdateAnimation(true);
+            return;
+        }
+
         playerInput.UpdateInput();
         body.gravityScale = gravity;
         body.drag = 0f;
@@ -152,6 +161,11 @@ public class PlayerMovement : MonoBehaviour
             transform.position = new Vector3(CameraMovement.CameraRect().xMax, transform.position.y, transform.position.z);
         }
 
+        UpdateAnimation(grounded);
+    }
+
+    private void UpdateAnimation(bool grounded)
+    {
         // Set all animation indicators
         animator.SetFloat("VelocityX", body.velocity.x);
         animator.SetFloat("VelocityY", body.velocity.y);

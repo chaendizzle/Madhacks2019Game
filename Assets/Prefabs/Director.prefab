@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b39ef5981c78c4f8f2d94090698a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPlatform: {fileID: 0}
+  startingPlatforms:
+  - {fileID: 0}
+  - {fileID: 0}
   floatingPlatforms:
   - {fileID: 400591006353267072, guid: c2b38245842151b4aa2dc666f66381e6, type: 3}
   - {fileID: 9209612867154024115, guid: f4ab386f2fb32ea4fa46bc387c1723e0, type: 3}
@@ -56,8 +58,8 @@ MonoBehaviour:
   - {fileID: 2685485809170659086, guid: 9d2933ee88d41c14fbcbf1912ff8e6e4, type: 3}
   platformBudget: 1
   waterHeight: -3.2
-  jumpVelocity: 14
+  jumpVelocity: 12.5
   xVelocity: 5
-  gravity: 35.316
+  gravity: 40
   xBufferDistance: 0
-  yBufferDistance: 1
+  yBufferDistance: 1.5

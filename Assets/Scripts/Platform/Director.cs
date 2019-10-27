@@ -6,7 +6,7 @@ using UnityEngine;
 public class Director : MonoBehaviour
 {
 
-    public GameObject startingPlatform; //MUST be populated
+    public List<GameObject> startingPlatforms; //MUST be populated
     public List<GameObject> floatingPlatforms;
     public List<GameObject> groundedPlatforms;
     public float platformBudget; //used to determine jump distance? and platform size;
@@ -51,7 +51,10 @@ public class Director : MonoBehaviour
         instance = this;
         distanceGenerated = CameraMovement.CameraRect().center.x;
         platforms = new List<RenderedPlatform>();
-        platforms.Add(new RenderedPlatform(startingPlatform));
+        foreach (GameObject platform in startingPlatforms)
+        {
+            platforms.Add(new RenderedPlatform(platform));
+        }
 
         groundedPlatforms.Sort(new LengthCompare());
     }

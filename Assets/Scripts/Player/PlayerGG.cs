@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerGG : MonoBehaviour
 {
     public int lives;
+    public float respawnTime;
 
     private CircleCollider2D c2d;
     private CapsuleCollider2D cp2d;
@@ -80,15 +82,18 @@ public class PlayerGG : MonoBehaviour
     IEnumerator Respawn()
     {
         state = State.RESPAWNING;
+        pm.inputEnabled = false;
         c2d.enabled = false;
         cp2d.enabled = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         r2d.isKinematic = true;
         r2d.velocity = Vector3.zero;
-        transform.position = new Vector3(
-            CameraMovement.CameraRect().center.x,
-            CameraMovement.CameraRect().yMax - 1, 0);
-        for (int i = 0; i < 3; i++)
+        //transform.position = new Vector3(
+        //    CameraMovement.CameraRect().center.x,
+        //    CameraMovement.CameraRect().yMax - 1, 0);
+        transform.position = FindRespawnPlatform().transform.position + new Vector3(0, 1.5f, 0);
+
+        for (int i = 0; i < respawnTime / 0.6f ; i++)
         {
             pm.sr.color = new Color(pm.sr.color.r, pm.sr.color.g, pm.sr.color.b, 0.5f);
             yield return new WaitForSeconds(0.3f);
@@ -96,8 +101,31 @@ public class PlayerGG : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
         r2d.isKinematic = false;
+        pm.inputEnabled = true;
         c2d.enabled = true;
         cp2d.enabled = true;
         state = State.ALIVE;
+    }
+
+    GameObject FindRespawnPlatform()
+    {
+        Director director = Director.GetInstance();
+        List<GameObject> platforms = director.GetPlatforms().ToList();
+
+        float cameraVelocity = Camera.main.GetComponent<CameraMovement>().speed.x; 
+        Rect cameraRect = CameraMovement.CameraRect();
+
+        foreach (GameObject platform in platforms)
+        {
+            //check that it's on screen and that it will still be on screen after respawn
+            if (platform.transform.position.x - (1.5 * respawnTime * cameraVelocity) > cameraRect.xMin)
+            {
+                return platform;
+            }
+        }
+
+        //if nothing found, just pack last element and pray
+        Debug.Log("WARNING: No suitable respawn platform, fuck it....");
+        return platforms[platforms.Count - 1];
     }
 }
