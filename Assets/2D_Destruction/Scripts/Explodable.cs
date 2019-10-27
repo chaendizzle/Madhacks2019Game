@@ -116,6 +116,7 @@ public class Explodable : MonoBehaviour
                 p.GetComponent<Renderer>().sortingLayerName = sortingLayerName;
                 p.GetComponent<Renderer>().sortingOrder = orderInLayer;
                 p.tag = "Fragment";
+                p.GetComponent<Rigidbody2D>().mass = 0.2f;
             }
         }
 
